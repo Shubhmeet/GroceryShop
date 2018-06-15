@@ -14,6 +14,11 @@ export class AppComponent {
       if (user) {
         userService.save(user);
         const returnUrl = localStorage.getItem('returnUrl');
+        /*redirection should be only for the first time when they return from login from google,
+        * so remove the returnurl from storage*/
+        if (returnUrl) {
+          localStorage.removeItem('returnUrl');
+        }
         router.navigateByUrl(returnUrl);
       }
     });

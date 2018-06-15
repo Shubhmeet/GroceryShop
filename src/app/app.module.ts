@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import {environment} from '../environments/environment';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation';
+import {DataTableModule} from 'angular5-data-table';
 
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -25,7 +27,7 @@ import {UserService} from './user.service';
 import {AdminAuthGuardService} from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import {CategoryService} from './category.service';
-import {ProductService} from "./product.service";
+import {ProductService} from './product.service';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import {ProductService} from "./product.service";
   imports: [
     BrowserModule,
     FormsModule,
+    DataTableModule,
+    CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -60,9 +64,14 @@ import {ProductService} from "./product.service";
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuardService]},
 
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+
       { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
+      { path: 'admin/products/:id',
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService] },
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardService, AdminAuthGuardService] },
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardService, AdminAuthGuardService] }
+
     ])
   ],
   providers: [
