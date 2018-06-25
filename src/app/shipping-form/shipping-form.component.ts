@@ -15,7 +15,7 @@ export class ShippingFormComponent implements OnInit, OnDestroy {
 
   @Input('cart') cart: ShoppingCart;
 
-  shipping = {};
+  shipping: any = {};
   userId: string;
   userSubscrption: Subscription;
   constructor(private router: Router, private authServcie: AuthService, private orderService: OrderService ) { }
