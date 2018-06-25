@@ -1,7 +1,12 @@
 # GroceryShop
 Ecommerce application using Angular 4 with Admin,Customer having facility to add products and checkout, google auto sign-in.
 Firebase is used for storing data, bootstrap is extensively used to ensure comfortable user experience.
-Still Under Construction!
+
+Users 
+
+Admin : Can Add products and view all orders placed
+
+User  : Add products to card, update cart at real-time, place order and view orders in My Order. To Place order, user must login using Google Login
 
 This project was generated with Angular CLI version 1.3.0.
 
