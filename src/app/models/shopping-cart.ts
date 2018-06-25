@@ -1,13 +1,19 @@
 import { ShoppingCartItem } from './shopping-cart-item';
 import {number} from 'ng2-validation/dist/number';
-import {Product} from "./product";
+import {Product} from './product';
 
 export class ShoppingCart {
   items: ShoppingCartItem[] = [];
-  constructor(public itemsMap: { [productId: string]: ShoppingCartItem}) {
+  constructor(private itemsMap: { [productId: string]: ShoppingCartItem}) {
+    this.itemsMap = this.itemsMap || {};
     for (const productId in itemsMap) {
       const item = this.itemsMap[productId];
-      this.items.push(new ShoppingCartItem(item.product, item.quantity));
+      const x = new ShoppingCartItem({
+        ...item,
+        $key: productId
+      });
+
+      this.items.push(x);
     }
   }
 
@@ -24,7 +30,7 @@ export class ShoppingCart {
   get totalPrice() {
     let price = 0;
     for (const productId in this.itemsMap) {
-      price += this.itemsMap[productId].quantity * this.itemsMap[productId].product.price;
+      price += this.itemsMap[productId].quantity * this.itemsMap[productId].price;
     }
     return price;
   }
